@@ -1,5 +1,6 @@
 package smartshare.administrationservice.configuration;
 
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
@@ -21,8 +23,8 @@ import java.util.Map;
 @Configuration
 public class KafkaConfiguration {
 
-    private Map<String, Object> consumerConfigurationProperties = new HashMap<>();
-    private Map<String, Object> producerConfigurationProperties = new HashMap<>();
+    private final Map<String, Object> consumerConfigurationProperties = new HashMap<>();
+    private final Map<String, Object> producerConfigurationProperties = new HashMap<>();
 
     KafkaConfiguration() {
 
@@ -84,6 +86,21 @@ public class KafkaConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory( bucketAdministrationConsumerFactory() );
         return factory;
+    }
+
+    @Bean
+    public NewTopic sagaAccessTopic() {
+        return TopicBuilder.name( "sagaAccess" ).compact().build();
+    }
+
+    @Bean
+    public NewTopic BucketAccessManagementTopic() {
+        return TopicBuilder.name( "BucketAccessManagement" ).compact().build();
+    }
+
+    @Bean
+    public NewTopic BucketObjectAccessManagementTopic() {
+        return TopicBuilder.name( "BucketObjectAccessManagement" ).compact().build();
     }
 
 }

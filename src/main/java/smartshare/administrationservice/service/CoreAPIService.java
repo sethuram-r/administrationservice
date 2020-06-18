@@ -14,7 +14,7 @@ import smartshare.administrationservice.dto.UploadObject;
 public class CoreAPIService {
 
     private final RestTemplate restTemplate;
-    private UriComponentsBuilder coreServerUrl;
+    private final UriComponentsBuilder coreServerUrl;
 
     @Autowired
     public CoreAPIService(RestTemplate restTemplate,
@@ -29,9 +29,7 @@ public class CoreAPIService {
         log.info( "Inside createEmptyFolder" );
         try {
             UriComponents url = coreServerUrl.replacePath( "folder/empty" ).build();
-            Boolean result = restTemplate.postForObject( url.toUriString(), uploadObject, Boolean.class );
-
-            return result;
+            return restTemplate.postForObject( url.toUriString(), uploadObject, Boolean.class );
         } catch (Exception e) {
             log.error( "Exception while creating folder " + e.getMessage() );
         }
