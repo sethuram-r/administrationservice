@@ -94,13 +94,20 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public NewTopic BucketAccessManagementTopic() {
+    public NewTopic sagaAccessResultTopic() {
+        return TopicBuilder.name( "sagaAccessResult" ).compact().build();
+    }
+
+    @Bean
+    public NewTopic bucketAccessManagementTopic() {
         return TopicBuilder.name( "BucketAccessManagement" ).compact().build();
     }
 
     @Bean
-    public NewTopic BucketObjectAccessManagementTopic() {
+    public NewTopic bucketObjectAccessManagementTopic() {
         return TopicBuilder.name( "BucketObjectAccessManagement" ).compact().build();
     }
+
+
 
 }
