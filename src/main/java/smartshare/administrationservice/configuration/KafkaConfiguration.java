@@ -1,10 +1,12 @@
 package smartshare.administrationservice.configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -19,21 +21,25 @@ import smartshare.administrationservice.dto.SagaEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @EnableKafka
 @Configuration
 public class KafkaConfiguration {
 
     private final Map<String, Object> consumerConfigurationProperties = new HashMap<>();
     private final Map<String, Object> producerConfigurationProperties = new HashMap<>();
+    private final KafkaParameters kafkaParameters;
 
-    KafkaConfiguration() {
-
-        producerConfigurationProperties.put( ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092" );
+    @Autowired
+    KafkaConfiguration(KafkaParameters kafkaParameters) {
+        this.kafkaParameters = kafkaParameters;
+        log.info( "Assigned kafka Url in KafkaConsumerConfiguration : " + this.kafkaParameters.getUrl() );
+        producerConfigurationProperties.put( ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaParameters.getUrl() );
         producerConfigurationProperties.put( ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class );
         producerConfigurationProperties.put( ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class );
 
 
-        consumerConfigurationProperties.put( ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092" );
+        consumerConfigurationProperties.put( ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaParameters.getUrl() );
         consumerConfigurationProperties.put( ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true );
         consumerConfigurationProperties.put( ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class );
         consumerConfigurationProperties.put( ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class );
@@ -107,7 +113,5 @@ public class KafkaConfiguration {
     public NewTopic bucketObjectAccessManagementTopic() {
         return TopicBuilder.name( "BucketObjectAccessManagement" ).compact().build();
     }
-
-
 
 }
