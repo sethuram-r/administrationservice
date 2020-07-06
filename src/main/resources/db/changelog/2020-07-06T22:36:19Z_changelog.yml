@@ -1,0 +1,368 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1594074986307-1
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: admin_aggregatePK
+                  name: admin_id
+                  type: INTEGER
+              - column:
+                  name: created_on
+                  type: date
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+            tableName: admin_aggregate
+  - changeSet:
+      id: 1594074986307-2
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: admin_role_aggregatePK
+                  name: admin_role_id
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: admin_id
+                  type: INTEGER
+            tableName: admin_role_aggregate
+  - changeSet:
+      id: 1594074986307-3
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_access_entityPK
+                  name: bucket_access_id
+                  type: INTEGER
+              - column:
+                  name: read
+                  type: BOOLEAN
+              - column:
+                  name: write
+                  type: BOOLEAN
+            tableName: bucket_access_entity
+  - changeSet:
+      id: 1594074986307-4
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_access_request_entityPK
+                  name: id
+                  type: INTEGER
+              - column:
+                  name: admin_role_id
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bucket_access_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bucket_id
+                  type: INTEGER
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+            tableName: bucket_access_request_entity
+  - changeSet:
+      id: 1594074986307-5
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_accessing_userPK
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bucket_access_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  name: bucket_id
+                  type: INTEGER
+            tableName: bucket_accessing_user
+  - changeSet:
+      id: 1594074986307-6
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_aggregatePK
+                  name: bucket_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: admin_id
+                  type: INTEGER
+              - column:
+                  name: bucket_name
+                  type: VARCHAR(255)
+            tableName: bucket_aggregate
+  - changeSet:
+      id: 1594074986307-7
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_object_access_request_entityPK
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bucket_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bucket_object_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: object_access_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: owner_id
+                  type: INTEGER
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+            tableName: bucket_object_access_request_entity
+  - changeSet:
+      id: 1594074986307-8
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_object_accessing_userPK
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bucket_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: object_access_id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  name: bucket_object_id
+                  type: INTEGER
+            tableName: bucket_object_accessing_user
+  - changeSet:
+      id: 1594074986307-9
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bucket_object_aggregatePK
+                  name: bucket_object_id
+                  type: INTEGER
+              - column:
+                  name: bucket_object_name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: owner_id
+                  type: INTEGER
+              - column:
+                  name: bucket_id
+                  type: INTEGER
+            tableName: bucket_object_aggregate
+  - changeSet:
+      id: 1594074986307-10
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: object_access_entityPK
+                  name: object_access_id
+                  type: INTEGER
+              - column:
+                  name: delete
+                  type: BOOLEAN
+              - column:
+                  name: read
+                  type: BOOLEAN
+              - column:
+                  name: write
+                  type: BOOLEAN
+            tableName: object_access_entity
+  - changeSet:
+      id: 1594074986307-11
+      author: sethuram (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: user_aggregatePK
+                  name: user_id
+                  type: INTEGER
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: user_name
+                  type: VARCHAR(255)
+            tableName: user_aggregate
+  - changeSet:
+      id: 1594074986307-12
+      author: sethuram (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: bucket_name
+            constraintName: UC_BUCKET_AGGREGATEBUCKET_NAME_COL
+            tableName: bucket_aggregate
+  - changeSet:
+      id: 1594074986307-13
+      author: sethuram (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bucket_object_id
+            baseTableName: bucket_object_accessing_user
+            constraintName: FK7rximjaiyukbs0vjw38jp4jsp
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: bucket_object_id
+            referencedTableName: bucket_object_aggregate
+            validate: true
+  - changeSet:
+      id: 1594074986307-14
+      author: sethuram (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bucket_id
+            baseTableName: bucket_accessing_user
+            constraintName: FKjx08du9bkuyhul94k8tnc9jhq
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: bucket_id
+            referencedTableName: bucket_aggregate
+            validate: true
+  - changeSet:
+      id: 1594074986307-15
+      author: sethuram (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: bucket_id
+            baseTableName: bucket_object_aggregate
+            constraintName: FKk13lyvukjm8gt3uok1r3g5okc
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: bucket_id
+            referencedTableName: bucket_aggregate
+            validate: true
+  - changeSet:
+      id: 1594074986307-16
+      author: sethuram (generated)
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from bucket_access_entity;
+      changes:
+        - sqlFile:
+            path:  db/data/bucket_access_entity.sql
+            splitStatements:  true
+
+  - changeSet:
+      id: 1594074986307-17
+      author: sethuram (generated)
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from object_access_entity;
+      changes:
+        - sqlFile:
+            path:  db/data/object_access_entity.sql
+            splitStatements:  true
